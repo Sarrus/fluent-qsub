@@ -42,7 +42,7 @@ cat << EOF > $casedir.csh
 # hours of runtime
 #$ -l h_rt=48:00:00
 #Processors to run on and memory limit
-#$ -pe ib $ibcores -l h_vmem=8G
+#$ -pe ib $ibcores -l h_vmem=4.5G
 #Folks to contact
 #$ -M michael@tertheya.com -m beas
 # define license and load module
