@@ -13,12 +13,6 @@ else
 	iterations=$2
 fi
 
-if [ "$3" = "" ]; then
-	ibcores="32"
-else
-	ibcores=$3
-fi
-
 casedir=$(echo $casefile | sed 's/\..*$//')
 
 mkdir $casedir
@@ -41,15 +35,15 @@ cat << EOF > $casedir.csh
 #$ -cwd
 # hours of runtime
 #$ -l h_rt=48:00:00
-#Processors to run on and memory limit
-#$ -pe ib $ibcores -l h_vmem=4.5G
+#Nodes to run on and memory limit
+#$ -l nodes=1 
 #Folks to contact
 #$ -M michael@tertheya.com -m beas
 # define license and load module
 module add ansys
 export ANSYSLMD_LICENSE_FILE=1055@ansys-server1.leeds.ac.uk
 # Launch the executable
-fluent -g -i $casedir.jou 3ddp -pib -sgeup -mpi=openmpi -rsh=ssh -affinity=off
+fluent -g -i $casedir.jou 3ddp -sgeup -mpi=openmpi -rsh=ssh -affinity=off
 EOF
 
 cat << EOF > $casedir.jou
